@@ -17,8 +17,8 @@ services:
       - /var/spool/mikopbx/storage:/storage
 
     environment:
-      - ID_WWW_USER=33          # ajuste para o UID que você obteve com `id`
-      - ID_WWW_GROUP=33         # ajuste para o GID
+      - ID_WWW_USER=1000          # ajuste para o UID que você obteve com `id`
+      - ID_WWW_GROUP=1000         # ajuste para o GID
       - PBX_NAME=MikoPBX-in-Coolify
       - SSH_PORT=2222
       - WEB_PORT=80
