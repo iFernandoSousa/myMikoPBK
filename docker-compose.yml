@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  mikopbx:
+    container_name: "mikopbx"
+    image: "ghcr.io/mikopbx/mikopbx-x86-64:2024.1.114"
+    # host mode não é suportado em novos stacks no Coolify, então usamos bridge
+    network_mode: "bridge"
+    cap_add:
+      - NET_ADMIN
+    entrypoint: "/sbin/docker-entrypoint"
+    hostname: "mikopbx-in-coolify"
+    tty: true
+
+    volumes:
+      - /var/spool/mikopbx/cf:/cf
+      - /var/spool/mikopbx/storage:/storage
+
+    environment:
+      - ID_WWW_USER=33          # ajuste para o UID que você obteve com `id`
+      - ID_WWW_GROUP=33         # ajuste para o GID
+      - PBX_NAME=MikoPBX-in-Coolify
+      - SSH_PORT=2222
+      - WEB_PORT=80
+      - WEB_HTTPS_PORT=443
+      - SIP_PORT=5060
+      - TLS_PORT=5061
+      - RTP_PORT_FROM=10000
+      - RTP_PORT_TO=10001
+
+    # Exposição real dos serviços no host
+    ports:
+      - "9080:80"                 # HTTP UI
+      - "9443:443"                # HTTPS UI
+      - "2222:2222"               # SSH (opcional)
+      - "5060:5060/udp"           # SIP UDP
+      - "5060:5060/tcp"           # SIP TCP
+      - "5061:5061/tcp"           # SIP TLS
+      - "10000-10001:10000-10001/udp" # RTP range exemplo
+
+    restart: unless-stopped
