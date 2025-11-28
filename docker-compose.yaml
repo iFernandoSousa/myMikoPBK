@@ -36,6 +36,6 @@ services:
       - "5060:5060/udp"           # SIP UDP
       - "5060:5060/tcp"           # SIP TCP
       - "5061:5061/tcp"           # SIP TLS
-      - "10000-10001:10000-10001/udp" # RTP range exemplo
+      - "10000-30000:10000-30000/udp" # RTP range exemplo
 
     restart: unless-stopped
