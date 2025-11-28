@@ -26,7 +26,7 @@ services:
       - SIP_PORT=5060
       - TLS_PORT=5061
       - RTP_PORT_FROM=10000
-      - RTP_PORT_TO=30000
+      - RTP_PORT_TO=20000
 
     # Exposição real dos serviços no host
     ports:
@@ -36,6 +36,6 @@ services:
       - "5060:5060/udp"           # SIP UDP
       - "5060:5060/tcp"           # SIP TCP
       - "5061:5061/tcp"           # SIP TLS
-      - "10000-30000:10000-30000/udp" # RTP range exemplo
+      - "10000-20000:10000-20000/udp" # RTP range exemplo
 
     restart: unless-stopped
